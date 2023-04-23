@@ -7,9 +7,9 @@
  */
 int main(void)
 {
-	int x;
+	int x = 97;
 
-	for (x = 97; x <= 122; x++)
+	while (x <= 122)
 	{
 		if (x == 101 || x == 113)
 		{
@@ -17,6 +17,7 @@ int main(void)
 			continue;
 		}
 		putchar(x);
+		x++;
 	}
 	putchar('\n');
 	return (0);
