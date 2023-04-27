@@ -10,22 +10,18 @@ int main(void)
 	int x;
 	long y = 1;
 	long z = 2;
+	long sum = z;
 
-	while (x < 50)
+	while (z + y < 4000000)
 	{
-		if (x == 0)
-		printf("%ld", y);
-		else if (x == 1)
-		printf("%ld", z);
-		else
-		{
-			z += y;
-			y = x - y;
-			printf(", %ld", z);
-		}
-		x++;
+		z += y;
+		if (z % 2 == 0)
+			sum += z;
+		y = z - y;
+		++x;
 	}
-	printf("\n");
+
+	printf("%ld\n", sum);
 
 	return (0);
 }
