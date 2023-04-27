@@ -7,7 +7,7 @@
  */
 int main(void)
 {
-	int x;
+	int x = 0;
 	long y = 1;
 	long z = 2;
 
@@ -16,14 +16,14 @@ int main(void)
 		if (x == 0)
 			printf("%ld", y);
 		else if (x == 1)
-			printf("%ld", z);
+			printf(", %ld", z);
 		else
 		{
 			z += y;
-			y = x - y;
+			y = z - y;
 			printf(", %ld", z);
 		}
-		x++;
+		++x;
 	}
 	printf("\n");
 	return (0);
