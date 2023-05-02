@@ -30,6 +30,14 @@ int main(void)
 		{
 			if (password[i] >= (33 + df1))
 			{
+				password[i] -= df1;
+				break;
+			}
+		}
+		for (i = 0; password[i]; i++)
+		{
+			if (password[i] >= (33 + df2))
+			{
 				password[i] -= df2;
 				break;
 			}
