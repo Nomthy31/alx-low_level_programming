@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
 					nout[k - 1] = (add / 10) + '0';
 				nout[k] = (add % 10) + '0';
 			}
-			i = ln1 - 1, j--, addl = 0, ca++, k = lnout - (1 - ca);
+			i = ln1 - 1, j--, addl = 0, ca++, k = lnout - (1 + ca);
 		}
 		if (j < 0)
 		{
