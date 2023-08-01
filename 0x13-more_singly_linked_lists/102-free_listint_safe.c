@@ -1,87 +1,42 @@
 #include "lists.h"
-#include <stdio.h>
-
-size_t looped_listint_len(const listint_t *head);
-size_t print_listint_safe(const listint_t *head);
 
 /**
- * looped_listint_len - Computes the number of unique nodes
- * @head: head node of the listint_t to check
- * Return: 0 if the list is not looped or num of nodes
+ * free_listint_safe - liberates a linked list
+ * @h: head node in the linked list
+ * Return: number of nodes in the freed list
  */
 
-size_t looped_listint_len(const listint_t *head)
+size_t free_listint_safe(listint_t **h)
 {
-	const listint_t *tortoise, *hare;
-	size_t nodes = 1;
+	size_t len = 0;
+	int diff;
+	listint_t *temp;
 
-	if (head == NULL || head->next == NULL)
+	if (!h || !*h)
 		return (0);
 
-	tortoise = head->next;
-	hare = (head->next)->next;
-
-	while (hare)
+	while (*h)
 	{
-		if (tortoise == hare)
+		diff = *h - (*h)->next;
+		if (diff > 0)
 		{
-			tortoise = head;
-			while (tortoise != hare)
-			{
-				nodes++;
-				tortoise = tortoise->next;
-				hare = hare->next;
-			}
-
-			tortoise = tortoise->next;
-			while (tortoise != hare)
-			{
-				nodes++;
-				tortoise = tortoise->next;
-			}
-
-			return (nodes);
+			temp = (*h)->next;
+			free(*h);
+			*h = temp;
+			len++;
 		}
-
-		tortoise = tortoise->next;
-		hare = (hare->next)->next;
+		else
+		{
+			free(*h);
+			*h = NULL;
+			len++;
+			break;
+		}
 	}
 
-	return (0);
+	*h = NULL;
+
+	return (len);
 }
 
-/**
- * print_listint_safe - computes listint_t list safely
- * @head: head node of the listint_t list
- * Return: number of nodes
- */
-
-size_t print_listint_safe(const listint_t *head)
-{
-	size_t nodes, index = 0;
-
-	nodes = looped_listint_len(head);
-
-	if (nodes == 0)
-	{
-		for (; head != NULL; nodes++)
-		{
-			printf("[%p] %d\n", (void *)head, head->n);
-			head = head->next;
-		}
-	}
-
-	else
-	{
-		for (index = 0; index < nodes; index++)
-		{
-			printf("[%p] %d\n", (void *)head, head->n);
-			head = head->next;
-		}
-
-		printf("-> [%p] %d\n", (void *)head, head->n);
-	}
-
-	return (nodes);
-}
 
